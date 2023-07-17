@@ -5,7 +5,7 @@ _name=pydantic
 pkgname=python-$_name
 # WARNING: upstream pins pydantic-core down to the patch-level and using other versions breaks tests! only update in lock-step with python-pydantic-core!
 pkgver=2.0.3
-pkgrel=2
+pkgrel=3
 pkgdesc='Data parsing and validation using Python type hints'
 arch=(any)
 url="https://github.com/pydantic/pydantic"
@@ -32,6 +32,7 @@ checkdepends=(
   python-email-validator
   python-faker
   python-hypothesis
+  python-pygments
   python-pytest
   python-pytest-benchmark
   python-pytest-examples
@@ -54,8 +55,6 @@ build() {
 check() {
   local pytest_options=(
     -vv
-    # issues with various doctests: https://github.com/pydantic/pydantic/issues/6656
-    --deselect tests/test_docs.py::test_docs_devtools_example
   )
   local site_packages=$(python -c "import site; print(site.getsitepackages()[0])")
 
