@@ -1,11 +1,12 @@
 pkgbase = python-pydantic
 	pkgdesc = Data parsing and validation using Python type hints
-	pkgver = 2.4.2
+	pkgver = 2.5.1
 	pkgrel = 1
 	url = https://github.com/pydantic/pydantic
 	arch = any
 	license = MIT
 	checkdepends = python-ansi2html
+	checkdepends = python-cloudpickle
 	checkdepends = python-devtools
 	checkdepends = python-dirty-equals
 	checkdepends = python-email-validator
@@ -32,8 +33,8 @@ pkgbase = python-pydantic
 	optdepends = python-dotenv: for .env file support
 	optdepends = python-email-validator: for email validation
 	optdepends = python-hypothesis: for hypothesis plugin when using legacy v1
-	source = https://github.com/pydantic/pydantic/archive/v2.4.2/pydantic-v2.4.2.tar.gz
-	sha512sums = f15249ce941a801bdc3bcee28c422023cc2a05e3d73cda7cc401e1197cc90a75d1893e2f6b5290b76131c5205c160f673fb02a96552dc0c3680f93736699f6af
-	b2sums = a82c09e53c2ae4ebf99564435765512e6b709f756acd75079882b57e864c327d7fe5ffd3244b57d23985f7965b840ce9011012171c346ae32a2c1a312bf1dc13
+	source = https://github.com/pydantic/pydantic/archive/v2.5.1/pydantic-v2.5.1.tar.gz
+	sha512sums = 7260d6496f2de69434c79eb36109e040b1307c53a15cf4c669fdeb4b3cded6c8b89cd449f24e6504b67e86641702664378801ad0ef631dcea858cdfaa529033b
+	b2sums = aafa69c00f3d5d099fd9e7e6602eee225d4efd14e99d0c59be51f0755aa3406fb56a91b13285c28e218e2149f5b1f888ee4c1613673c3f03d4b3d13dd200e713
 
 pkgname = python-pydantic

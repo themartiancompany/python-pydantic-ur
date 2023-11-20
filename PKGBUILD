@@ -4,7 +4,7 @@
 _name=pydantic
 pkgname=python-$_name
 # WARNING: upstream pins pydantic-core down to the patch-level and using other versions breaks tests! only update in lock-step with python-pydantic-core!
-pkgver=2.4.2
+pkgver=2.5.1
 pkgrel=1
 pkgdesc='Data parsing and validation using Python type hints'
 arch=(any)
@@ -27,6 +27,7 @@ makedepends=(
 )
 checkdepends=(
   python-ansi2html
+  python-cloudpickle
   python-devtools
   python-dirty-equals
   python-email-validator
@@ -46,8 +47,8 @@ optdepends=(
   'python-hypothesis: for hypothesis plugin when using legacy v1'
 )
 source=($url/archive/v$pkgver/$_name-v$pkgver.tar.gz)
-sha512sums=('f15249ce941a801bdc3bcee28c422023cc2a05e3d73cda7cc401e1197cc90a75d1893e2f6b5290b76131c5205c160f673fb02a96552dc0c3680f93736699f6af')
-b2sums=('a82c09e53c2ae4ebf99564435765512e6b709f756acd75079882b57e864c327d7fe5ffd3244b57d23985f7965b840ce9011012171c346ae32a2c1a312bf1dc13')
+sha512sums=('7260d6496f2de69434c79eb36109e040b1307c53a15cf4c669fdeb4b3cded6c8b89cd449f24e6504b67e86641702664378801ad0ef631dcea858cdfaa529033b')
+b2sums=('aafa69c00f3d5d099fd9e7e6602eee225d4efd14e99d0c59be51f0755aa3406fb56a91b13285c28e218e2149f5b1f888ee4c1613673c3f03d4b3d13dd200e713')
 
 build() {
   cd $_name-$pkgver
@@ -56,6 +57,15 @@ build() {
 
 check() {
   local pytest_options=(
+    # disable broken tests: https://github.com/pydantic/pydantic/issues/8180
+    --deselect tests/benchmarks/test_north_star.py::test_north_star_validate_json
+    --deselect tests/benchmarks/test_north_star.py::test_north_star_validate_json_strict
+    --deselect tests/benchmarks/test_north_star.py::test_north_star_dump_json
+    --deselect tests/benchmarks/test_north_star.py::test_north_star_validate_python
+    --deselect tests/benchmarks/test_north_star.py::test_north_star_validate_python_strict
+    --deselect tests/benchmarks/test_north_star.py::test_north_star_dump_python
+    --deselect tests/benchmarks/test_north_star.py::test_north_star_json_loads
+    --deselect tests/benchmarks/test_north_star.py::test_north_star_json_dumps
     -vv
   )
   local site_packages=$(python -c "import site; print(site.getsitepackages()[0])")
