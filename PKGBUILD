@@ -1,5 +1,8 @@
+# SPDX-License-Identifier: AGPL-3.0
+#
 # Maintainer: David Runge <dvzrv@archlinux.org>
 # Maintainer: Filipe Laíns (FFY00) <lains@archlinux.org>
+# Maintainer: Pellegrino Prevete (dvorak) <pellegrinoprevete@gmail.com>
 
 _name=pydantic
 pkgname=python-$_name
@@ -84,3 +87,5 @@ package() {
   python -m installer --destdir="$pkgdir" dist/*.whl
   install -vDm 644 LICENSE -t "$pkgdir/usr/share/licenses/$pkgname/"
 }
+
+# vim:set sw=2 sts=-1 et:
