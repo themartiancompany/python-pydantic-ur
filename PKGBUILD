@@ -25,6 +25,15 @@
 # Maintainer: Filipe Laíns (FFY00) <lains@archlinux.org>
 
 _py="python"
+_pyver="$( \
+  "${_py}" \
+    -V | \
+    awk \
+      '{print $2}')"
+_pymajver="${_pyver%.*}"
+_pyminver="${_pymajver#*.}"
+_pynextver="${_pymajver%.*}.$(( \
+  ${_pyminver} + 1))"
 _pkg=pydantic
 pkgname="${_py}-${_pkg}"
 # WARNING: upstream pins pydantic-core
@@ -46,10 +55,11 @@ license=(
   'MIT'
 )
 depends=(
- "${_py}"
- "${_py}-annotated-types"
- "${_py}-pydantic-core"
- "${_py}-typing-extensions"
+  "${_py}>=${_pymajver}"
+  "${_py}<${_pynextver}"
+  "${_py}-annotated-types"
+  "${_py}-pydantic-core"
+  "${_py}-typing-extensions"
 )
 makedepends=(
   "cython"
